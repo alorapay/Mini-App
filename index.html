@@ -1,128 +1,224 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini App</title>
+<title>Alora Pay</title>
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#0b1220;color:#fff;
- font-family:Arial,sans-serif;padding:18px;
+ margin:0;font-family:Arial,sans-serif;color:#30204b;
+ background:linear-gradient(160deg,#1837dc,#6478f5,#a22bdc,#f00091);
+ min-height:100vh;padding-bottom:95px;
 }
+header{
+ text-align:center;padding:25px 15px 35px;
+ color:white;background:linear-gradient(140deg,#2920c8,#6325d9);
+}
+header h1{margin:0;font-size:29px}
+header p{margin:10px 0 0}
+.container{padding:15px;max-width:600px;margin:auto}
 .card{
- background:#172235;border:1px solid #263650;
- border-radius:18px;padding:20px;margin-bottom:16px;
+ background:#fff9ff;border-radius:24px;
+ padding:20px;margin-bottom:17px;
+ box-shadow:0 5px 15px #24108025;
 }
 .balance{
- background:linear-gradient(135deg,#087f5b,#13b887);
- border-radius:22px;padding:24px;margin-bottom:20px;
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;
 }
+.amount{font-size:32px;font-weight:bold;color:#263bc1;margin-top:8px}
 button{
- background:#12b981;color:#fff;border:0;
- padding:14px;border-radius:12px;font-weight:bold;
- width:100%;margin-top:10px;
+ border:0;border-radius:30px;padding:12px 19px;
+ background:linear-gradient(100deg,#1944e5,#8525d9);
+ color:white;font-weight:bold;font-size:14px;
 }
-.nav{
- display:grid;grid-template-columns:repeat(4,1fr);
- gap:8px;margin-top:18px;
+h3{margin:5px 0 17px}
+.section-title{color:white;font-size:19px;margin:25px 5px 15px}
+.grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:15px;
 }
-.nav button{background:#1c2940;font-size:12px}
-h2,h3{margin-top:5px}
-.small{color:#aab7ca}
+.task{
+ text-align:center;min-height:150px;
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:12px;
+}
+.task .emoji{font-size:30px;background:#e9eaff;padding:12px;border-radius:50%}
+.task small{
+ background:#ffe0f0;color:#a42d75;padding:6px 15px;
+ border-radius:20px;font-weight:bold;
+}
 .page{display:none}
 .page.active{display:block}
-input{
- width:100%;padding:14px;border-radius:10px;
- border:1px solid #34445e;background:#0d1728;
- color:white;margin-top:10px;
+.bottom{
+ position:fixed;bottom:0;left:0;width:100%;
+ background:#ffeafa;border-radius:35px 35px 0 0;
+ display:flex;justify-content:space-around;
+ padding:13px 3px 18px;box-shadow:0 -5px 20px #0002;
 }
+.bottom button{
+ background:transparent;color:#39234e;
+ padding:8px 4px;font-size:12px;
+ display:flex;flex-direction:column;gap:5px;align-items:center;
+}
+.bottom button.active{background:#f4d4ee;border-radius:25px}
+.bottom span{font-size:21px}
+input{
+ width:100%;padding:14px;border:1px solid #ddd;
+ border-radius:14px;margin:10px 0;font-size:15px;
+}
+.info{text-align:center;color:#786a86;font-size:13px}
 </style>
 </head>
 <body>
 
-<h2>✨ Welcome to Velio</h2>
-<p class="small">আপনার রিওয়ার্ড যাত্রা শুরু করুন</p>
+<header>
+ <div style="font-size:42px">💗</div>
+ <h1>Alora Pay</h1>
+ <p>Welcome to Alora Pay Rewards</p>
+</header>
 
-<div class="balance">
-<p>💰 আপনার মোট পয়েন্ট</p>
-<h1 id="bal">120</h1>
-<p>Demo Balance</p>
-</div>
+<div class="container">
 
-<div class="nav">
-<button onclick="show('home')">🏠 Home</button>
-<button onclick="show('tasks')">🎯 Tasks</button>
-<button onclick="show('refer')">👥 Refer</button>
-<button onclick="show('withdraw')">💸 Withdraw</button>
+<div class="card balance">
+ <div>
+  <b>মোট ইনকাম (বাংলা)</b>
+  <div class="amount">৳ <span id="balance">0</span></div>
+ </div>
+ <button onclick="showPage('withdraw')">▣ Withdraw</button>
 </div>
 
 <div id="home" class="page active">
-<div class="card">
-<h3>🌟 স্বাগতম!</h3>
-<p>সহজ টাস্ক সম্পন্ন করুন এবং পয়েন্ট সংগ্রহ করুন।</p>
-</div>
-<div class="card">
-<h3>📊 আপনার অ্যাকাউন্ট</h3>
-<p>বর্তমান পয়েন্ট: <b id="bal2">120</b></p>
-<p>অ্যাকাউন্ট: Demo User</p>
-</div>
+ <h3 class="section-title">🌟 Our Active Income Projects</h3>
+ <div class="grid">
+  <div class="card task">
+   <div class="emoji">⌨️</div>
+   <b>Typing Job</b>
+   <small>৳5</small>
+   <button onclick="task('Typing Job',5)">Start Job</button>
+  </div>
+  <div class="card task">
+   <div class="emoji">❔</div>
+   <b>Quiz Job</b>
+   <small>৳5</small>
+   <button onclick="task('Quiz Job',5)">Start Quiz</button>
+  </div>
+  <div class="card task">
+   <div class="emoji">📺</div>
+   <b>Ads Video</b>
+   <small>৳10</small>
+   <button onclick="task('Ads Video',10)">Watch Ads</button>
+  </div>
+  <div class="card task">
+   <div class="emoji">🎡</div>
+   <b>Daily Spin</b>
+   <small>৳20-300</small>
+   <button onclick="spin()">Spin Now</button>
+  </div>
+  <div class="card task">
+   <div class="emoji">💳</div>
+   <b>Payment</b>
+   <small>৳20</small>
+   <button onclick="alert('Payment information coming soon')">Details</button>
+  </div>
+  <div class="card task">
+   <div class="emoji">✈️</div>
+   <b>Official Channel</b>
+   <small>Join Us</small>
+   <button onclick="alert('Official channel link coming soon')">Join</button>
+  </div>
+ </div>
 </div>
 
-<div id="tasks" class="page">
-<div class="card">
-<h3>🎯 Daily Task</h3>
-<p>এই Demo Task সম্পন্ন করে পয়েন্ট সংগ্রহ করুন।</p>
-<button onclick="task(this)">Task Complete +10</button>
-</div>
-<div class="card">
-<h3>📌 Special Task</h3>
-<p>Demo task reward: 20 points</p>
-<button onclick="task(this,20)">Complete Task +20</button>
-</div>
+<div id="leader" class="page">
+ <h3 class="section-title">🏆 Leaderboard</h3>
+ <div class="card">
+  <h3>Top Earners</h3>
+  <p>🥇 1. Coming Soon</p>
+  <p>🥈 2. Coming Soon</p>
+  <p>🥉 3. Coming Soon</p>
+ </div>
 </div>
 
 <div id="refer" class="page">
-<div class="card">
-<h3>👥 Refer & Earn</h3>
-<p>বন্ধুদের আমন্ত্রণ জানান।</p>
-<p>Demo Referral Code: <b>VELIO123</b></p>
-<button onclick="copyCode()">📋 কোড কপি করুন</button>
-</div>
+ <h3 class="section-title">🎁 Refer & Earn</h3>
+ <div class="card">
+  <h2>Invite Friends</h2>
+  <p>বন্ধুদের আমন্ত্রণ জানান</p>
+  <input id="refLink" value="Your referral link coming soon" readonly>
+  <button onclick="copyRef()">Copy Link</button>
+ </div>
 </div>
 
 <div id="withdraw" class="page">
-<div class="card">
-<h3>💸 Withdraw Request</h3>
-<p class="small">এটি শুধুমাত্র Demo। এখানে বাস্তব টাকা পাঠানো হয় না।</p>
-<input placeholder="আপনার পেমেন্ট নম্বর">
-<input placeholder="টাকার পরিমাণ">
-<button onclick="alert('Demo request submitted!')">Request Withdraw</button>
+ <h3 class="section-title">💳 Withdraw</h3>
+ <div class="card">
+  <h2>৳ <span id="withdrawBalance">0</span></h2>
+  <p>Payment Method</p>
+  <select id="method" style="width:100%;padding:14px;border-radius:12px">
+   <option>bKash</option>
+   <option>Nagad</option>
+  </select>
+  <input id="number" placeholder="01XXXXXXXXX">
+  <input id="amount" type="number" placeholder="Withdraw Amount">
+  <button onclick="withdraw()">Submit Request</button>
+  <p class="info">Demo only — real payment is not connected.</p>
+ </div>
 </div>
+
+<div id="profile" class="page">
+ <h3 class="section-title">👤 My Profile</h3>
+ <div class="card">
+  <h2>Welcome to Alora Pay 💗</h2>
+  <p>Username: Alora User</p>
+  <p>Total Balance: ৳ <span id="profileBalance">0</span></p>
+ </div>
 </div>
+
+</div>
+
+<nav class="bottom">
+ <button class="active" onclick="showPage('home',this)"><span>⌂</span>Home</button>
+ <button onclick="showPage('leader',this)"><span>🏆</span>Leader</button>
+ <button onclick="showPage('refer',this)"><span>🎁</span>Refer</button>
+ <button onclick="showPage('withdraw',this)"><span>💳</span>Withdraw</button>
+ <button onclick="showPage('profile',this)"><span>👤</span>Profile</button>
+</nav>
 
 <script>
-let balance=120;
+let balance=0;
 
-function show(id){
+function update(){
+ document.getElementById('balance').textContent=balance;
+ document.getElementById('withdrawBalance').textContent=balance;
+ document.getElementById('profileBalance').textContent=balance;
+}
+
+function showPage(id,btn){
  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
  document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
+ if(btn) btn.classList.add('active');
+ else document.querySelectorAll('.bottom button')[3].classList.add('active');
 }
 
-function task(btn,amount=10){
- if(btn.disabled)return;
- balance+=amount;
- document.getElementById('bal').innerText=balance;
- document.getElementById('bal2').innerText=balance;
- btn.innerText="Completed ✓";
- btn.disabled=true;
+function task(name,points){
+ alert(name+' is a demo task. Real earning is not enabled.');
 }
 
-function copyCode(){
- navigator.clipboard.writeText("VELIO123");
- alert("Referral code copied!");
+function spin(){
+ alert('Daily Spin demo. Real rewards are not enabled.');
+}
+
+function copyRef(){
+ alert('Referral link will be added after Telegram Bot setup.');
+}
+
+function withdraw(){
+ alert('Withdrawal is not connected yet. This is a demo interface.');
 }
 </script>
-
 </body>
 </html>
+
