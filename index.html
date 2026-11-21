@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini App</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#0b1220;color:#fff;
+ font-family:Arial,sans-serif;padding:18px;
+}
+.card{
+ background:#172235;border:1px solid #263650;
+ border-radius:18px;padding:20px;margin-bottom:16px;
+}
+.balance{
+ background:linear-gradient(135deg,#087f5b,#13b887);
+ border-radius:22px;padding:24px;margin-bottom:20px;
+}
+button{
+ background:#12b981;color:#fff;border:0;
+ padding:14px;border-radius:12px;font-weight:bold;
+ width:100%;margin-top:10px;
+}
+.nav{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:8px;margin-top:18px;
+}
+.nav button{background:#1c2940;font-size:12px}
+h2,h3{margin-top:5px}
+.small{color:#aab7ca}
+.page{display:none}
+.page.active{display:block}
+input{
+ width:100%;padding:14px;border-radius:10px;
+ border:1px solid #34445e;background:#0d1728;
+ color:white;margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<h2>✨ Welcome to Velio</h2>
+<p class="small">আপনার রিওয়ার্ড যাত্রা শুরু করুন</p>
+
+<div class="balance">
+<p>💰 আপনার মোট পয়েন্ট</p>
+<h1 id="bal">120</h1>
+<p>Demo Balance</p>
+</div>
+
+<div class="nav">
+<button onclick="show('home')">🏠 Home</button>
+<button onclick="show('tasks')">🎯 Tasks</button>
+<button onclick="show('refer')">👥 Refer</button>
+<button onclick="show('withdraw')">💸 Withdraw</button>
+</div>
+
+<div id="home" class="page active">
+<div class="card">
+<h3>🌟 স্বাগতম!</h3>
+<p>সহজ টাস্ক সম্পন্ন করুন এবং পয়েন্ট সংগ্রহ করুন।</p>
+</div>
+<div class="card">
+<h3>📊 আপনার অ্যাকাউন্ট</h3>
+<p>বর্তমান পয়েন্ট: <b id="bal2">120</b></p>
+<p>অ্যাকাউন্ট: Demo User</p>
+</div>
+</div>
+
+<div id="tasks" class="page">
+<div class="card">
+<h3>🎯 Daily Task</h3>
+<p>এই Demo Task সম্পন্ন করে পয়েন্ট সংগ্রহ করুন।</p>
+<button onclick="task(this)">Task Complete +10</button>
+</div>
+<div class="card">
+<h3>📌 Special Task</h3>
+<p>Demo task reward: 20 points</p>
+<button onclick="task(this,20)">Complete Task +20</button>
+</div>
+</div>
+
+<div id="refer" class="page">
+<div class="card">
+<h3>👥 Refer & Earn</h3>
+<p>বন্ধুদের আমন্ত্রণ জানান।</p>
+<p>Demo Referral Code: <b>VELIO123</b></p>
+<button onclick="copyCode()">📋 কোড কপি করুন</button>
+</div>
+</div>
+
+<div id="withdraw" class="page">
+<div class="card">
+<h3>💸 Withdraw Request</h3>
+<p class="small">এটি শুধুমাত্র Demo। এখানে বাস্তব টাকা পাঠানো হয় না।</p>
+<input placeholder="আপনার পেমেন্ট নম্বর">
+<input placeholder="টাকার পরিমাণ">
+<button onclick="alert('Demo request submitted!')">Request Withdraw</button>
+</div>
+</div>
+
+<script>
+let balance=120;
+
+function show(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+
+function task(btn,amount=10){
+ if(btn.disabled)return;
+ balance+=amount;
+ document.getElementById('bal').innerText=balance;
+ document.getElementById('bal2').innerText=balance;
+ btn.innerText="Completed ✓";
+ btn.disabled=true;
+}
+
+function copyCode(){
+ navigator.clipboard.writeText("VELIO123");
+ alert("Referral code copied!");
+}
+</script>
+
+</body>
+</html>
