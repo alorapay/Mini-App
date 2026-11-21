@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alora Pay</title>
+
 <style>
 *{box-sizing:border-box}
 body{
@@ -36,9 +37,7 @@ button{
 }
 h3{margin:5px 0 17px}
 .section-title{color:white;font-size:19px;margin:25px 5px 15px}
-.grid{
- display:grid;grid-template-columns:1fr 1fr;gap:15px;
-}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .task{
  text-align:center;min-height:150px;
  display:flex;flex-direction:column;align-items:center;
@@ -64,13 +63,29 @@ h3{margin:5px 0 17px}
 }
 .bottom button.active{background:#f4d4ee;border-radius:25px}
 .bottom span{font-size:21px}
-input{
+input,select{
  width:100%;padding:14px;border:1px solid #ddd;
  border-radius:14px;margin:10px 0;font-size:15px;
 }
 .info{text-align:center;color:#786a86;font-size:13px}
+.payment-option{
+ width:100%;padding:17px;margin:8px 0;
+ border-radius:14px;background:white;color:#30204b;
+ border:2px solid #eee;text-align:left;
+ display:flex;align-items:center;justify-content:space-between;
+}
+.payment-option.selected{border:2px solid #7130d8;background:#f7efff}
+.pay-bkash{color:#d8176e;font-size:19px}
+.pay-nagad{color:#ed8500;font-size:19px}
+.primary{width:100%;padding:15px;margin-top:12px}
+.hidden{display:none!important}
+.notice{
+ background:#fff0d9;padding:12px;border-radius:12px;
+ color:#80521b;font-size:13px;margin-top:12px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -81,6 +96,63 @@ input{
 
 <div class="container">
 
+<!-- REGISTRATION PAGE -->
+<div id="register" class="page active">
+
+ <div class="card" style="text-align:center">
+  <h2 style="color:#6325d9">Create Your Account 💗</h2>
+  <p>Welcome to Alora Pay</p>
+  <h1 style="font-size:38px;color:#d8176e">৳300</h1>
+  <b>One-time Registration Fee</b>
+  <p class="info">Non-refundable Registration Fee</p>
+ </div>
+
+ <div class="card">
+  <h3>👤 Account Information</h3>
+
+  <input id="regName" placeholder="Your Full Name">
+  <input id="regPhone" type="tel" placeholder="Your Mobile Number">
+  <input id="regPassword" type="password" placeholder="Create Password">
+
+  <h3 style="margin-top:22px">💳 Select Payment Method</h3>
+
+  <button type="button" class="payment-option"
+   id="bkashOption" onclick="selectPayment('bKash')">
+   <span class="pay-bkash">💗 bKash</span>
+   <span>○ Select</span>
+  </button>
+
+  <button type="button" class="payment-option"
+   id="nagadOption" onclick="selectPayment('Nagad')">
+   <span class="pay-nagad">🟠 Nagad</span>
+   <span>○ Select</span>
+  </button>
+
+  <div id="paymentDetails" class="hidden">
+   <div class="notice">
+    <b>Payment Amount: ৳300</b>
+    <p id="selectedMethod"></p>
+    <p>Payment Number: <b id="paymentNumber">Number will be added soon</b></p>
+    <p>Send Money করে Transaction ID নিচের ঘরে দিন।</p>
+   </div>
+
+   <input id="transactionId"
+    placeholder="Enter Transaction ID">
+
+   <button class="primary" onclick="submitRegistration()">
+    Submit Registration
+   </button>
+  </div>
+
+  <p class="info">
+   Account will remain pending until payment is verified.
+  </p>
+ </div>
+</div>
+
+<!-- BALANCE -->
+<div id="dashboard" class="hidden">
+
 <div class="card balance">
  <div>
   <b>মোট ইনকাম (বাংলা)</b>
@@ -89,48 +161,59 @@ input{
  <button onclick="showPage('withdraw')">▣ Withdraw</button>
 </div>
 
-<div id="home" class="page active">
+</div>
+
+<!-- HOME -->
+<div id="home" class="page">
  <h3 class="section-title">🌟 Our Active Income Projects</h3>
  <div class="grid">
+
   <div class="card task">
    <div class="emoji">⌨️</div>
    <b>Typing Job</b>
    <small>৳5</small>
    <button onclick="task('Typing Job',5)">Start Job</button>
   </div>
+
   <div class="card task">
    <div class="emoji">❔</div>
    <b>Quiz Job</b>
    <small>৳5</small>
    <button onclick="task('Quiz Job',5)">Start Quiz</button>
   </div>
+
   <div class="card task">
    <div class="emoji">📺</div>
    <b>Ads Video</b>
    <small>৳10</small>
    <button onclick="task('Ads Video',10)">Watch Ads</button>
   </div>
+
   <div class="card task">
    <div class="emoji">🎡</div>
    <b>Daily Spin</b>
    <small>৳20-300</small>
    <button onclick="spin()">Spin Now</button>
   </div>
+
   <div class="card task">
    <div class="emoji">💳</div>
    <b>Payment</b>
    <small>৳20</small>
    <button onclick="alert('Payment information coming soon')">Details</button>
   </div>
+
   <div class="card task">
    <div class="emoji">✈️</div>
    <b>Official Channel</b>
    <small>Join Us</small>
    <button onclick="alert('Official channel link coming soon')">Join</button>
   </div>
+
  </div>
 </div>
 
+<!-- LEADERBOARD -->
 <div id="leader" class="page">
  <h3 class="section-title">🏆 Leaderboard</h3>
  <div class="card">
@@ -141,6 +224,7 @@ input{
  </div>
 </div>
 
+<!-- REFER -->
 <div id="refer" class="page">
  <h3 class="section-title">🎁 Refer & Earn</h3>
  <div class="card">
@@ -151,12 +235,13 @@ input{
  </div>
 </div>
 
+<!-- WITHDRAW -->
 <div id="withdraw" class="page">
  <h3 class="section-title">💳 Withdraw</h3>
  <div class="card">
   <h2>৳ <span id="withdrawBalance">0</span></h2>
   <p>Payment Method</p>
-  <select id="method" style="width:100%;padding:14px;border-radius:12px">
+  <select id="method">
    <option>bKash</option>
    <option>Nagad</option>
   </select>
@@ -167,6 +252,7 @@ input{
  </div>
 </div>
 
+<!-- PROFILE -->
 <div id="profile" class="page">
  <h3 class="section-title">👤 My Profile</h3>
  <div class="card">
@@ -178,31 +264,122 @@ input{
 
 </div>
 
-<nav class="bottom">
- <button class="active" onclick="showPage('home',this)"><span>⌂</span>Home</button>
- <button onclick="showPage('leader',this)"><span>🏆</span>Leader</button>
- <button onclick="showPage('refer',this)"><span>🎁</span>Refer</button>
- <button onclick="showPage('withdraw',this)"><span>💳</span>Withdraw</button>
- <button onclick="showPage('profile',this)"><span>👤</span>Profile</button>
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom hidden" id="bottomNav">
+ <button class="active" onclick="showPage('home',this)">
+  <span>⌂</span>Home
+ </button>
+ <button onclick="showPage('leader',this)">
+  <span>🏆</span>Leader
+ </button>
+ <button onclick="showPage('refer',this)">
+  <span>🎁</span>Refer
+ </button>
+ <button onclick="showPage('withdraw',this)">
+  <span>💳</span>Withdraw
+ </button>
+ <button onclick="showPage('profile',this)">
+  <span>👤</span>Profile
+ </button>
 </nav>
 
 <script>
-let balance=0;
 
+// =================================
+// ALORA PAY PAYMENT SETTINGS
+// =================================
+
+// পরে এখানে নিজের নম্বর বসাবে
+const BKASH_NUMBER = "";
+const NAGAD_NUMBER = "";
+
+let balance = 0;
+let selectedMethod = "";
+
+// PAYMENT METHOD SELECT
+function selectPayment(method){
+
+ selectedMethod = method;
+
+ document.getElementById('paymentDetails').classList.remove('hidden');
+
+ document.getElementById('selectedMethod').textContent =
+ "Selected Payment: " + method;
+
+ let number = method === "bKash"
+  ? BKASH_NUMBER
+  : NAGAD_NUMBER;
+
+ document.getElementById('paymentNumber').textContent =
+ number || "Number will be added soon";
+
+ document.getElementById('bkashOption').classList.toggle(
+  'selected',method === "bKash"
+ );
+
+ document.getElementById('nagadOption').classList.toggle(
+  'selected',method === "Nagad"
+ );
+}
+
+// REGISTRATION SUBMISSION
+function submitRegistration(){
+
+ let name = document.getElementById('regName').value.trim();
+ let phone = document.getElementById('regPhone').value.trim();
+ let password = document.getElementById('regPassword').value;
+ let trx = document.getElementById('transactionId').value.trim();
+
+ if(!name || !phone || !password || !trx || !selectedMethod){
+  alert("Please complete all information.");
+  return;
+ }
+
+ if(!BKASH_NUMBER && selectedMethod === "bKash"){
+  alert("bKash Number has not been added yet.");
+  return;
+ }
+
+ if(!NAGAD_NUMBER && selectedMethod === "Nagad"){
+  alert("Nagad Number has not been added yet.");
+  return;
+ }
+
+ alert(
+  "Registration submitted successfully!\n\n" +
+  "Payment Method: " + selectedMethod +
+  "\nAmount: ৳300" +
+  "\nTransaction ID: " + trx +
+  "\n\nStatus: Pending Verification\n" +
+  "Your account is not active yet."
+ );
+
+}
+
+// UPDATE BALANCE
 function update(){
  document.getElementById('balance').textContent=balance;
  document.getElementById('withdrawBalance').textContent=balance;
  document.getElementById('profileBalance').textContent=balance;
 }
 
+// PAGE NAVIGATION
 function showPage(id,btn){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+
+ document.querySelectorAll('.page').forEach(p=>{
+  p.classList.remove('active');
+ });
+
  document.getElementById(id).classList.add('active');
- document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
+
+ document.querySelectorAll('.bottom button').forEach(b=>{
+  b.classList.remove('active');
+ });
+
  if(btn) btn.classList.add('active');
- else document.querySelectorAll('.bottom button')[3].classList.add('active');
 }
 
+// DEMO TASKS
 function task(name,points){
  alert(name+' is a demo task. Real earning is not enabled.');
 }
@@ -218,7 +395,11 @@ function copyRef(){
 function withdraw(){
  alert('Withdrawal is not connected yet. This is a demo interface.');
 }
+
+update();
+
 </script>
 </body>
 </html>
+
 
