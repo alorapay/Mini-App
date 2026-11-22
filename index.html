@@ -151,18 +151,30 @@ input,select{
 </div>
 
 <!-- BALANCE -->
-<div id="dashboard" class="hidden">
+ 
+<div id="dashboard" class="page">
+  <div class="card" style="padding:22px;background:linear-gradient(135deg,#7138d8,#e83eaa);color:white;border-radius:20px;">
+    <p style="margin:0 0 8px;">Welcome to Alora Pay 💗</p>
+    <h2 style="margin:0;">Hello, <span id="dashboardName">User</span>!</h2>
+    <p style="margin:8px 0 0;">আপনার ইনকাম ড্যাশবোর্ডে স্বাগতম</p>
+  </div>
 
-<div class="card balance">
- <div>
-  <b>মোট ইনকাম (বাংলা)</b>
-  <div class="amount">৳ <span id="balance">0</span></div>
- </div>
- <button onclick="showPage('withdraw')">▣ Withdraw</button>
+  <div class="card balance">
+    <b>Total Balance</b>
+    <div class="amount">৳ <span id="balance">0</span></div>
+    <button onclick="showPage('withdraw')">▣ Withdraw</button>
+  </div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px;">
+    <div class="card">
+      <b>Today's Income</b>
+      <h2>৳ <span id="todayIncome">0</span></h2>
+    </div>
+    <div class="card">
+      <b>Total Income</b>
+      <h2>৳ <span id="totalIncome">0</span></h2>
+    </div>
+  </div>
 </div>
-
-</div>
-
 <!-- HOME -->
 <div id="home" class="page">
  <h3 class="section-title">🌟 Our Active Income Projects</h3>
