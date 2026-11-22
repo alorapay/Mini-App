@@ -413,20 +413,27 @@ function update(){
 }
 
 // PAGE NAVIGATION
+
 function showPage(id,btn){
 
  document.querySelectorAll('.page').forEach(p=>{
   p.classList.remove('active');
  });
 
- document.getElementById(id).classList.add('active');
+ const page = document.getElementById(id);
+
+ if(!page) return;
+
+ page.classList.add('active');
 
  document.querySelectorAll('.bottom button').forEach(b=>{
   b.classList.remove('active');
  });
 
  if(btn) btn.classList.add('active');
+
 }
+
 
 // DEMO TASKS
 function task(name,points){
