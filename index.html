@@ -335,6 +335,7 @@ function selectPayment(method){
 }
 
 // REGISTRATION SUBMISSION
+
 function submitRegistration(){
 
  let name = document.getElementById('regName').value.trim();
@@ -357,6 +358,8 @@ function submitRegistration(){
   return;
  }
 
+ document.getElementById('dashboardName').textContent = name;
+
  alert(
   "Registration submitted successfully!\n\n" +
   "Payment Method: " + selectedMethod +
@@ -367,6 +370,7 @@ function submitRegistration(){
  );
 
 }
+
 
 // UPDATE BALANCE
 function update(){
