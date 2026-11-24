@@ -104,7 +104,7 @@ header strong{font-size:22px}.screen{display:none;padding:16px}.screen.active{di
 </section>
 
 <section id="tasks" class="screen">
-<h2>Daily Tasks</h2><div class="notice">প্রতিদিন ৬টি Task। প্রতিটি সফলভাবে যাচাই হলে ৳৫। বাংলাদেশ সময় রাত ১২টায় Task Reset হবে।</div>
+<h2>Daily Tasks</h2><div class="notice">প্রতিদিন ৬টি Task। প্রতিটি সফলভাবে যাচাই হলে ৳১০। বাংলাদেশ সময় রাত ১২টায় Task Reset হবে।</div>
 <div class="card"><div id="taskList"></div></div>
 </section>
 
@@ -114,7 +114,7 @@ header strong{font-size:22px}.screen{display:none;padding:16px}.screen.active{di
 <div id="questionText" class="numberbox">Task question will load here.</div>
 <div id="answerOptions"></div>
 <button class="btn full" onclick="submitTask()">Submit Answer</button>
-<p class="muted">সঠিক উত্তর যাচাই হলে ৳৫ যোগ হবে।</p>
+<p class="muted">সঠিক উত্তর যাচাই হলে ৳১০ যোগ হবে।</p>
 </div>
 </section>
 
@@ -275,7 +275,7 @@ async function loadHome(){
 }
 function taskHTML(t){
  const done=!!t.completed;
- return `<div class="task"><div class="task-icon">🎯</div><div class="task-info"><b>${escapeHTML(t.title||"Daily Task")}</b><small>Reward ৳${Number(t.reward||5)}</small></div><button class="btn ${done?"light":""}" ${done?"disabled":""} onclick="openTask('${escapeAttr(t.id)}')">${done?"Completed":"Start"}</button></div>`;
+ return `<div class="task"><div class="task-icon">🎯</div><div class="task-info"><b>${escapeHTML(t.title||"Daily Task")}</b><small>Reward ৳${Number(t.reward||10)}</small></div><button class="btn ${done?"light":""}" ${done?"disabled":""} onclick="openTask('${escapeAttr(t.id)}')">${done?"Completed":"Start"}</button></div>`;
 }
 function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function escapeAttr(s){return String(s??"").replace(/['"\\]/g,"")}
