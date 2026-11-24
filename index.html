@@ -3,458 +3,366 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#3B14A7">
 <title>Alora Pay</title>
-
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;font-family:Arial,sans-serif;color:#30204b;
- background:linear-gradient(160deg,#1837dc,#6478f5,#a22bdc,#f00091);
- min-height:100vh;padding-bottom:95px;
-}
-header{
- text-align:center;padding:25px 15px 35px;
- color:white;background:linear-gradient(140deg,#2920c8,#6325d9);
-}
-header h1{margin:0;font-size:29px}
-header p{margin:10px 0 0}
-.container{padding:15px;max-width:600px;margin:auto}
-.card{
- background:#fff9ff;border-radius:24px;
- padding:20px;margin-bottom:17px;
- box-shadow:0 5px 15px #24108025;
-}
-.balance{
- display:flex;align-items:center;justify-content:space-between;
- gap:10px;
-}
-.amount{font-size:32px;font-weight:bold;color:#263bc1;margin-top:8px}
-button{
- border:0;border-radius:30px;padding:12px 19px;
- background:linear-gradient(100deg,#1944e5,#8525d9);
- color:white;font-weight:bold;font-size:14px;
-}
-h3{margin:5px 0 17px}
-.section-title{color:white;font-size:19px;margin:25px 5px 15px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.task{
- text-align:center;min-height:150px;
- display:flex;flex-direction:column;align-items:center;
- justify-content:center;gap:12px;
-}
-.task .emoji{font-size:30px;background:#e9eaff;padding:12px;border-radius:50%}
-.task small{
- background:#ffe0f0;color:#a42d75;padding:6px 15px;
- border-radius:20px;font-weight:bold;
-}
-.page{display:none}
-.page.active{display:block}
-.bottom{
- position:fixed;bottom:0;left:0;width:100%;
- background:#ffeafa;border-radius:35px 35px 0 0;
- display:flex;justify-content:space-around;
- padding:13px 3px 18px;box-shadow:0 -5px 20px #0002;
-}
-.bottom button{
- background:transparent;color:#39234e;
- padding:8px 4px;font-size:12px;
- display:flex;flex-direction:column;gap:5px;align-items:center;
-}
-.bottom button.active{background:#f4d4ee;border-radius:25px}
-.bottom span{font-size:21px}
-input,select{
- width:100%;padding:14px;border:1px solid #ddd;
- border-radius:14px;margin:10px 0;font-size:15px;
-}
-.info{text-align:center;color:#786a86;font-size:13px}
-.payment-option{
- width:100%;padding:17px;margin:8px 0;
- border-radius:14px;background:white;color:#30204b;
- border:2px solid #eee;text-align:left;
- display:flex;align-items:center;justify-content:space-between;
-}
-.payment-option.selected{border:2px solid #7130d8;background:#f7efff}
-.pay-bkash{color:#d8176e;font-size:19px}
-.pay-nagad{color:#ed8500;font-size:19px}
-.primary{width:100%;padding:15px;margin-top:12px}
+:root{--p:#3B14A7;--p2:#5A189A;--pink:#E91E63;--gold:#FFC107;--bg:#F6F1FF;--ink:#28164A;--muted:#887B9E}
+*{box-sizing:border-box}body{margin:0;background:#eee8fa;color:var(--ink);font-family:Arial,"Noto Sans Bengali",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+.app{max-width:480px;min-height:100vh;margin:auto;background:var(--bg);padding-bottom:85px}
+header{height:62px;background:linear-gradient(110deg,var(--p),var(--p2));color:white;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:5}
+header strong{font-size:22px}.screen{display:none;padding:16px}.screen.active{display:block}
+.auth{padding:18px}.logo{text-align:center;padding:25px 0}
+.logo i{display:grid;place-items:center;margin:auto;width:76px;height:76px;border-radius:25px;background:linear-gradient(135deg,var(--gold),var(--pink),var(--p2));color:white;font-size:38px;font-style:normal;font-weight:900}
+.logo h1{margin:12px 0 4px;color:var(--p);font-size:31px}.logo p,.muted{color:var(--muted);font-size:13px}
+.card{background:white;border:1px solid #eadfff;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 6px 20px #3b14a70c}
+.input{width:100%;padding:14px;border:1.5px solid #e3d7f5;border-radius:12px;margin:7px 0;outline:none;background:white}
+.input:focus{border-color:var(--p)}.btn{border:0;border-radius:13px;padding:13px 16px;color:white;font-weight:900;background:linear-gradient(100deg,var(--p),var(--pink))}
+.btn.full{width:100%;margin-top:9px}.btn.light{background:#f1eaff;color:var(--p);border:1px solid #e5d8ff}
+.btn.gold{background:linear-gradient(100deg,var(--gold),#ff9800);color:#482b00}
+.link{border:0;background:none;color:var(--p);font-weight:800;padding:10px}
+.notice{background:#fff5d9;color:#775300;border-radius:12px;padding:12px;margin:10px 0;font-size:13px;line-height:1.6}
+.methods{display:flex;gap:10px}.method{flex:1;border:1.5px solid #e3d7f5;background:white;border-radius:12px;padding:13px;color:var(--p);font-weight:900}
+.method.selected{border-color:var(--pink);background:#fff0f7;color:var(--pink)}
+.numberbox{background:#f5efff;border:1px dashed #b99ce7;padding:13px;border-radius:12px;margin:10px 0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.hero{background:linear-gradient(125deg,#32108e,#5A189A 55%,#D81B60);color:white;border-radius:21px;padding:19px}
+.profile{display:flex;align-items:center;gap:12px;background:linear-gradient(110deg,#eee6ff,#fff0f7);padding:13px;border-radius:17px;margin-bottom:13px}
+.avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--p),var(--pink));color:white;font-size:23px}
+.profile-info{flex:1}.profile-info b{display:block}.badge{background:#fff0c2;color:#805900;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:900}
+.balance{font-size:32px;font-weight:900;margin:9px 0}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:white;border:1px solid #eadfff;border-radius:15px;padding:13px}.stat small{color:var(--muted);font-weight:700}
+.stat strong{display:block;color:var(--p);font-size:21px;margin-top:7px}
+.task{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #f0eafa}
+.task:last-child{border:0}.task-icon{width:42px;height:42px;border-radius:13px;background:#f0e8ff;display:grid;place-items:center;font-size:21px}
+.task-info{flex:1}.task-info b{display:block;font-size:14px}.task-info small{color:var(--pink);font-weight:800}
+.task .btn{padding:9px 13px;font-size:12px}
+.rank{display:flex;align-items:center;gap:10px;padding:12px 3px;border-bottom:1px solid #eee7f7}
+.rank-no{width:34px;height:34px;border-radius:50%;background:#f0e8ff;color:var(--p);display:grid;place-items:center;font-weight:900}
+.rank-name{flex:1;font-weight:800}.rank-money{font-weight:900;color:var(--p)}
+.tabs{display:flex;gap:6px;overflow:auto;margin-bottom:12px}.tab{white-space:nowrap;border:1px solid #e5d8ff;border-radius:20px;background:white;color:var(--p);padding:9px 12px;font-size:12px;font-weight:800}
+.tab.active{background:var(--p);color:white}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:70px;background:white;border-top:1px solid #eadfff;display:flex;justify-content:space-around;align-items:center;z-index:10}
+.bottom button{border:0;background:none;color:#887b9e;font-size:11px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bottom button.active{color:var(--p)}.bottom span{font-size:21px}
+.item{padding:12px 0;border-bottom:1px solid #eee7f7;font-size:13px}
+.item:last-child{border:0}.status{font-weight:900;color:#b07900}.empty{text-align:center;color:var(--muted);padding:22px}
 .hidden{display:none!important}
-.notice{
- background:#fff0d9;padding:12px;border-radius:12px;
- color:#80521b;font-size:13px;margin-top:12px;
-}
 </style>
 </head>
-
 <body>
+<div class="app">
+<header><button class="iconbtn" onclick="toggleMenu()">☰</button><strong>Alora Pay</strong><button class="iconbtn" onclick="notify()">♧</button></header>
 
-<header>
- <div style="font-size:42px">💗</div>
- <h1>Alora Pay</h1>
- <p>Welcome to Alora Pay Rewards</p>
-</header>
+<section id="welcome" class="screen active auth">
+<div class="logo"><i>৳</i><h1>Alora Pay</h1><p>Earn • Refer • Withdraw</p><p>Task Complete • Earn Money</p></div>
+<div class="hero"><h2>Welcome to Alora Pay</h2><p>Complete tasks and earn rewards.</p></div>
+<button class="btn full" onclick="show('register')">Create Account</button>
+<button class="btn light full" onclick="show('login')">Login</button>
+<p class="muted" style="text-align:center">Secure account • Real verified records</p>
+</section>
 
-<div class="container">
-
-<!-- REGISTRATION PAGE -->
-<div id="register" class="page active">
-
- <div class="card" style="text-align:center">
-  <h2 style="color:#6325d9">Create Your Account 💗</h2>
-  <p>Welcome to Alora Pay</p>
-  <h1 style="font-size:38px;color:#d8176e">৳300</h1>
-  <b>One-time Registration Fee</b>
-  <p class="info">Non-refundable Registration Fee</p>
- </div>
-
- <div class="card">
-  <h3>👤 Account Information</h3>
-
-  <input id="regName" placeholder="Your Full Name">
-  <input id="regPhone" type="tel" placeholder="Your Mobile Number">
-  <input id="regPassword" type="password" placeholder="Create Password">
-
-  <h3 style="margin-top:22px">💳 Select Payment Method</h3>
-
-  <button type="button" class="payment-option"
-   id="bkashOption" onclick="selectPayment('bKash')">
-   <span class="pay-bkash">💗 bKash</span>
-   <span>○ Select</span>
-  </button>
-
-  <button type="button" class="payment-option"
-   id="nagadOption" onclick="selectPayment('Nagad')">
-   <span class="pay-nagad">🟠 Nagad</span>
-   <span>○ Select</span>
-  </button>
-
-  <div id="paymentDetails" class="hidden">
-   <div class="notice">
-    <b>Payment Amount: ৳300</b>
-    <p id="selectedMethod"></p>
-    <p>Payment Number: <b id="paymentNumber">Number will be added soon</b></p>
-    <p>Send Money করে Transaction ID নিচের ঘরে দিন।</p>
-   </div>
-
-   <input id="transactionId"
-    placeholder="Enter Transaction ID">
-
-   <button class="primary" onclick="submitRegistration()">
-    Submit Registration
-   </button>
-  </div>
-
-  <p class="info">
-   Account will remain pending until payment is verified.
-  </p>
- </div>
+<section id="register" class="screen auth">
+<h2>Create Account</h2>
+<div class="card">
+<input id="regName" class="input" placeholder="Full Name">
+<input id="regMobile" class="input" type="tel" placeholder="Mobile Number">
+<input id="regPass" class="input" type="password" placeholder="Password">
+<div class="title">Registration Fee: ৳300</div>
+<div class="methods">
+<button class="method selected" id="bkashBtn" onclick="choosePay('bKash')">bKash</button>
+<button class="method" id="nagadBtn" onclick="choosePay('Nagad')">Nagad</button>
 </div>
- 
-<div id="login" class="page">
-  <div class="card" style="text-align:center">
-    <h2 style="color:#6325d9">Welcome Back 💗</h2>
-    <p>Login to Alora Pay</p>
-  </div>
-
-  <div class="card">
-    <h3>👤 Account Login</h3>
-
-    <input id="loginPhone" type="tel"
-      placeholder="Your Mobile Number">
-
-    <input id="loginPassword" type="password"
-      placeholder="Your Password">
-
-    <button class="primary" onclick="loginUser()">
-      Login
-    </button>
-
-    <p class="info">
-      Your account must be approved by Admin.
-    </p>
-  </div>
+<div class="numberbox"><small>Send Money to Personal Number</small><h3 id="payNumber">Loading...</h3><small id="payProvider">bKash</small></div>
+<input id="regTrx" class="input" placeholder="300 টাকা পাঠানোর Transaction ID">
+<input id="regRef" class="input" placeholder="Referral Code (Optional)">
+<div class="notice">প্রথমে ৳৩০০ Send Money করুন। Transaction ID জমা দিন। Admin যাচাই করে Account Active করবেন।</div>
+<button class="btn full" onclick="register()">Submit Registration</button>
 </div>
+<button class="link" onclick="show('login')">Already have an account? Login</button>
+</section>
 
+<section id="login" class="screen auth">
+<h2>Login</h2><div class="card">
+<input id="loginMobile" class="input" placeholder="Mobile Number">
+<input id="loginPass" class="input" type="password" placeholder="Password">
+<button class="btn full" onclick="login()">Login</button>
+</div><button class="link" onclick="show('register')">Create Account</button>
+</section>
 
-<!-- BALANCE -->
- 
-<div id="dashboard" class="page">
-  <div class="card" style="padding:22px;background:linear-gradient(135deg,#7138d8,#e83eaa);color:white;border-radius:20px;">
-    <p style="margin:0 0 8px;">Welcome to Alora Pay 💗</p>
-    <h2 style="margin:0;">Hello, <span id="dashboardName">User</span>!</h2>
-    <p style="margin:8px 0 0;">আপনার ইনকাম ড্যাশবোর্ডে স্বাগতম</p>
-  </div>
-
-  <div class="card balance">
-    <b>Total Balance</b>
-    <div class="amount">৳ <span id="balance">0</span></div>
-    <button onclick="showPage('withdraw')">▣ Withdraw</button>
-  </div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px;">
-    <div class="card">
-      <b>Today's Income</b>
-      <h2>৳ <span id="todayIncome">0</span></h2>
-    </div>
-    <div class="card">
-      <b>Total Income</b>
-      <h2>৳ <span id="totalIncome">0</span></h2>
-    </div>
-  </div>
+<section id="home" class="screen">
+<div class="profile"><div class="avatar">👤</div><div class="profile-info"><b id="userName">User</b><small id="userId">ID: --</small></div><span class="badge" id="accountStatus">Pending</span></div>
+<div class="hero"><div class="row"><span>Available Balance</span><span>৳ BDT</span></div><div class="balance" id="balance">৳0.00</div><button class="btn gold" onclick="show('withdraw')">Withdraw</button></div>
+<div class="grid2">
+<div class="stat"><small>Today's Income</small><strong id="todayIncome">৳0</strong></div>
+<div class="stat"><small>Total Income</small><strong id="totalIncome">৳0</strong></div>
+<div class="stat"><small>Today's Tasks</small><strong id="taskCount">0/6</strong></div>
+<div class="stat"><small>Your Referrals</small><strong id="refCount">0</strong></div>
 </div>
-<!-- HOME -->
-<div id="home" class="page">
- <h3 class="section-title">🌟 Our Active Income Projects</h3>
- <div class="grid">
+<div class="card"><div class="row"><b>Daily Tasks</b><button class="link" onclick="show('tasks')">See All</button></div><div id="homeTasks"></div></div>
+<div class="card"><b>Refer & Earn</b><p class="muted">বন্ধুকে Refer করুন। তার ৳৩০০ Deposit Admin Approve হলে Referral Bonus যোগ হবে।</p><button class="btn full" onclick="show('refer')">Refer Friends</button></div>
+</section>
 
-  <div class="card task">
-   <div class="emoji">⌨️</div>
-   <b>Typing Job</b>
-   <small>৳5</small>
-   <button onclick="task('Typing Job',5)">Start Job</button>
-  </div>
+<section id="tasks" class="screen">
+<h2>Daily Tasks</h2><div class="notice">প্রতিদিন ৬টি Task। প্রতিটি সফলভাবে যাচাই হলে ৳৫। বাংলাদেশ সময় রাত ১২টায় Task Reset হবে।</div>
+<div class="card"><div id="taskList"></div></div>
+</section>
 
-  <div class="card task">
-   <div class="emoji">❔</div>
-   <b>Quiz Job</b>
-   <small>৳5</small>
-   <button onclick="task('Quiz Job',5)">Start Quiz</button>
-  </div>
-
-  <div class="card task">
-   <div class="emoji">📺</div>
-   <b>Ads Video</b>
-   <small>৳10</small>
-   <button onclick="task('Ads Video',10)">Watch Ads</button>
-  </div>
-
-  <div class="card task">
-   <div class="emoji">🎡</div>
-   <b>Daily Spin</b>
-   <small>৳20-300</small>
-   <button onclick="spin()">Spin Now</button>
-  </div>
-
-  <div class="card task">
-   <div class="emoji">💳</div>
-   <b>Payment</b>
-   <small>৳20</small>
-   <button onclick="alert('Payment information coming soon')">Details</button>
-  </div>
-
-  <div class="card task">
-   <div class="emoji">✈️</div>
-   <b>Official Channel</b>
-   <small>Join Us</small>
-   <button onclick="alert('Official channel link coming soon')">Join</button>
-  </div>
-
- </div>
+<section id="taskDetail" class="screen">
+<h2>Task Details</h2><div class="card">
+<p>প্রশ্ন: নিচের প্রশ্নটি পড়ে সঠিক উত্তর নির্বাচন করুন।</p>
+<div id="questionText" class="numberbox">Task question will load here.</div>
+<div id="answerOptions"></div>
+<button class="btn full" onclick="submitTask()">Submit Answer</button>
+<p class="muted">সঠিক উত্তর যাচাই হলে ৳৫ যোগ হবে।</p>
 </div>
+</section>
 
-<!-- LEADERBOARD -->
-<div id="leader" class="page">
- <h3 class="section-title">🏆 Leaderboard</h3>
- <div class="card">
-  <h3>Top Earners</h3>
-  <p>🥇 1. Coming Soon</p>
-  <p>🥈 2. Coming Soon</p>
-  <p>🥉 3. Coming Soon</p>
- </div>
+<section id="refer" class="screen">
+<h2>Refer & Earn</h2><div class="hero"><h2>Refer Your Friends</h2><p>Successful approved referral bonus ৳৫০</p></div>
+<div class="card"><b>Your Referral Code</b><div class="numberbox row"><strong id="refCode">Loading...</strong><button class="btn" onclick="copyText('refCode')">Copy</button></div>
+<b>Your Referral Link</b><div class="numberbox"><div id="refLink" style="overflow-wrap:anywhere">Loading...</div><button class="btn full" onclick="copyReferral()">Copy Referral Link</button></div>
+<button class="btn light full" onclick="shareReferral()">Share Referral Link</button></div>
+<div class="grid2"><div class="stat"><small>Total Referrals</small><strong id="refTotal">0</strong></div><div class="stat"><small>Referral Bonus</small><strong id="refBonus">৳0</strong></div></div>
+<div class="notice">Referral Bonus পেতে নতুন User-কে ৳৩০০ Deposit করে Admin Approval পেতে হবে। Pending বা Rejected Deposit-এ কোনো Bonus দেওয়া হবে না।</div>
+</section>
+
+<section id="leaderboard" class="screen">
+<h2>🏆 Top 10 Leaderboard</h2><div class="notice">অ্যাকাউন্ট খোলার পর থেকে মোট যাচাইকৃত Earnings অনুযায়ী Ranking।</div>
+<div class="card" id="leaderList"><div class="empty">Leaderboard loading...</div></div>
+</section>
+
+<section id="withdraw" class="screen">
+<h2>Withdraw</h2><div class="hero"><small>Available Balance</small><div class="balance" id="withdrawBalance">৳0</div><small>Minimum Withdraw ৳500</small></div>
+<div class="card">
+<input id="withdrawAmount" class="input" type="number" min="500" placeholder="Withdraw Amount">
+<div class="methods"><button class="method selected" id="wBkash" onclick="chooseWithdraw('bKash')">bKash Personal</button><button class="method" id="wNagad" onclick="chooseWithdraw('Nagad')">Nagad Personal</button></div>
+<input id="withdrawNumber" class="input" type="tel" placeholder="Your Personal Number">
+<div class="notice">শুধুমাত্র নিজের bKash Personal অথবা Nagad Personal Number দিন। Admin যাচাই করে Request Approve/Reject করবেন।</div>
+<button class="btn full" onclick="requestWithdraw()">Submit Withdraw Request</button>
 </div>
+</section>
 
-<!-- REFER -->
-<div id="refer" class="page">
- <h3 class="section-title">🎁 Refer & Earn</h3>
- <div class="card">
-  <h2>Invite Friends</h2>
-  <p>বন্ধুদের আমন্ত্রণ জানান</p>
-  <input id="refLink" value="Your referral link coming soon" readonly>
-  <button onclick="copyRef()">Copy Link</button>
- </div>
+<section id="history" class="screen">
+<h2>History</h2><div class="tabs">
+<button class="tab active" onclick="historyTab('deposit',this)">Deposit</button>
+<button class="tab" onclick="historyTab('task',this)">Task</button>
+<button class="tab" onclick="historyTab('referral',this)">Referral</button>
+<button class="tab" onclick="historyTab('withdraw',this)">Withdraw</button>
+</div><div class="card" id="historyList"><div class="empty">History loading...</div></div>
+</section>
+
+<section id="profile" class="screen">
+<h2>My Profile</h2><div class="card">
+<div class="profile"><div class="avatar">👤</div><div class="profile-info"><b id="profileName">User</b><small id="profileMobile">Mobile: --</small></div></div>
+<div class="item">User ID: <b id="profileId">--</b></div>
+<div class="item">Account Status: <b id="profileStatus">--</b></div>
+<div class="item">Referral Code: <b id="profileCode">--</b></div>
+<button class="btn light full" onclick="logout()">Logout</button>
 </div>
+</section>
 
-<!-- WITHDRAW -->
-<div id="withdraw" class="page">
- <h3 class="section-title">💳 Withdraw</h3>
- <div class="card">
-  <h2>৳ <span id="withdrawBalance">0</span></h2>
-  <p>Payment Method</p>
-  <select id="method">
-   <option>bKash</option>
-   <option>Nagad</option>
-  </select>
-  <input id="number" placeholder="01XXXXXXXXX">
-  <input id="amount" type="number" placeholder="Withdraw Amount">
-  <button onclick="withdraw()">Submit Request</button>
-  <p class="info">Demo only — real payment is not connected.</p>
- </div>
-</div>
-
-<!-- PROFILE -->
-<div id="profile" class="page">
- <h3 class="section-title">👤 My Profile</h3>
- <div class="card">
-  <h2>Welcome to Alora Pay 💗</h2>
-  <p>Username: Alora User</p>
-  <p>Total Balance: ৳ <span id="profileBalance">0</span></p>
- </div>
-</div>
-
-</div>
-
-<!-- BOTTOM NAVIGATION -->
 <nav class="bottom" id="bottomNav">
- <button class="active" onclick="showPage('home',this)">
-  <span>⌂</span>Home
- </button>
- <button onclick="showPage('leader',this)">
-  <span>🏆</span>Leader
- </button>
- <button onclick="showPage('refer',this)">
-  <span>🎁</span>Refer
- </button>
- <button onclick="showPage('withdraw',this)">
-  <span>💳</span>Withdraw
- </button>
- <button onclick="showPage('profile',this)">
-  <span>👤</span>Profile
- </button>
+<button class="active" onclick="navigate('home',this)"><span>⌂</span>Home</button>
+<button onclick="navigate('tasks',this)"><span>▣</span>Tasks</button>
+<button onclick="navigate('refer',this)"><span>♧</span>Refer</button>
+<button onclick="navigate('leaderboard',this)"><span>🏆</span>Top 10</button>
+<button onclick="navigate('profile',this)"><span>♙</span>Profile</button>
 </nav>
-
+</div>
 <script>
+const API="https://alorapayapi.sagor00007sagor.workers.dev";
+const $=id=>document.getElementById(id);
+let token=localStorage.getItem("alora_token")||"";
+let user=null,config={},paymentMethod="bKash",withdrawMethod="bKash",activeTask=null,historyType="deposit";
+let tasks=[];
 
-// =================================
-// ALORA PAY PAYMENT SETTINGS
-// =================================
-
-// পরে এখানে নিজের নম্বর বসাবে
-const BKASH_NUMBER = "";
-const NAGAD_NUMBER = "";
-
-let balance = 0;
-let selectedMethod = "";
-
-// PAYMENT METHOD SELECT
-function selectPayment(method){
-
- selectedMethod = method;
-
- document.getElementById('paymentDetails').classList.remove('hidden');
-
- document.getElementById('selectedMethod').textContent =
- "Selected Payment: " + method;
-
- let number = method === "bKash"
-  ? BKASH_NUMBER
-  : NAGAD_NUMBER;
-
- document.getElementById('paymentNumber').textContent =
- number || "Number will be added soon";
-
- document.getElementById('bkashOption').classList.toggle(
-  'selected',method === "bKash"
- );
-
- document.getElementById('nagadOption').classList.toggle(
-  'selected',method === "Nagad"
- );
+async function api(path,method="GET",data=null){
+ const headers={"Content-Type":"application/json"};
+ if(token)headers.Authorization="Bearer "+token;
+ const res=await fetch(API+path,{method,headers,body:data?JSON.stringify(data):undefined});
+ let result={};try{result=await res.json()}catch(e){}
+ if(!res.ok||result.ok===false)throw new Error(result.message||result.error||"Request failed");
+ return result;
 }
-
-// REGISTRATION SUBMISSION
-
-function submitRegistration(){
-
- let name = document.getElementById('regName').value.trim();
- let phone = document.getElementById('regPhone').value.trim();
- let password = document.getElementById('regPassword').value;
- let trx = document.getElementById('transactionId').value.trim();
-
- if(!name || !phone || !password || !trx || !selectedMethod){
-  alert("Please complete all information.");
-  return;
- }
-
- if(!BKASH_NUMBER && selectedMethod === "bKash"){
-  alert("bKash Number has not been added yet.");
-  return;
- }
-
- if(!NAGAD_NUMBER && selectedMethod === "Nagad"){
-  alert("Nagad Number has not been added yet.");
-  return;
- }
-
- document.getElementById('dashboardName').textContent = name;
-
- alert(
-  "Registration submitted successfully!\n\n" +
-  "Payment Method: " + selectedMethod +
-  "\nAmount: ৳300" +
-  "\nTransaction ID: " + trx +
-  "\n\nStatus: Pending Verification\n" +
-  "Your account is not active yet."
- );
-
+function show(id){
+ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+ $(id).classList.add("active");
+ $("bottomNav").style.display=["welcome","login","register"].includes(id)?"none":"flex";
+ if(["home","tasks","refer","leaderboard","withdraw","history","profile"].includes(id)&&!token){show("login");return}
+ if(id==="home")loadHome();
+ if(id==="tasks")loadTasks();
+ if(id==="refer")loadReferral();
+ if(id==="leaderboard")loadLeaderboard();
+ if(id==="history")loadHistory(historyType);
+ if(id==="withdraw")loadHome();
 }
+function navigate(id,btn){document.querySelectorAll(".bottom button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");show(id)}
+function toggleMenu(){if(!token){show("login");return}show("profile")}
+function notify(){alert("আপনার Notification এখানে দেখানো হবে।")}
+function money(v){return "৳"+Number(v||0).toFixed(2)}
+function msg(e){alert(e.message||"সমস্যা হয়েছে। আবার চেষ্টা করুন।")}
 
-// LOGIN FUNCTION
-function loginUser(){
-
- alert("Login system is not active yet. It will be enabled after database and admin approval setup.");
-
+async function loadConfig(){
+ try{config=await api("/api/config");}
+ catch(e){console.error(e)}
+ updatePaymentNumber();
 }
-
-// UPDATE BALANCE
-function update(){
- document.getElementById('balance').textContent=balance;
- document.getElementById('withdrawBalance').textContent=balance;
- document.getElementById('profileBalance').textContent=balance
+function choosePay(method){
+ paymentMethod=method;
+ $("bkashBtn").classList.toggle("selected",method==="bKash");
+ $("nagadBtn").classList.toggle("selected",method==="Nagad");
+ updatePaymentNumber();
 }
-
-// PAGE NAVIGATION
-
-function showPage(id,btn){
-
- document.querySelectorAll('.page').forEach(p=>{
-  p.classList.remove('active');
- });
-
- const page = document.getElementById(id);
-
- if(!page) return;
-
- page.classList.add('active');
-
- document.querySelectorAll('.bottom button').forEach(b=>{
-  b.classList.remove('active');
- });
-
- if(btn) btn.classList.add('active');
-
+function updatePaymentNumber(){
+ const number=paymentMethod==="bKash"?(config.bkash_number||config.payment_number):(config.nagad_number||"");
+ $("payNumber").textContent=number||"Admin-এর Worker Config-এ নম্বর সেট করতে হবে";
+ $("payProvider").textContent=paymentMethod+" Personal";
 }
-
-
-// DEMO TASKS
-function task(name,points){
- alert(name+' is a demo task. Real earning is not enabled.');
+function chooseWithdraw(method){
+ withdrawMethod=method;
+ $("wBkash").classList.toggle("selected",method==="bKash");
+ $("wNagad").classList.toggle("selected",method==="Nagad");
 }
-
-function spin(){
- alert('Daily Spin demo. Real rewards are not enabled.');
+async function register(){
+ const full_name=$("regName").value.trim(),mobile=$("regMobile").value.trim(),password=$("regPass").value,transaction_id=$("regTrx").value.trim(),referral_code=$("regRef").value.trim();
+ if(!full_name||!mobile||!password||!transaction_id)return alert("সব তথ্য পূরণ করুন।");
+ if(password.length<6)return alert("Password কমপক্ষে ৬ অক্ষরের দিন।");
+ try{
+  const r=await api("/api/register","POST",{full_name,mobile,password,transaction_id,payment_method:paymentMethod,referral_code});
+  if(r.token){token=r.token;localStorage.setItem("alora_token",token)}
+  alert(r.message||"Registration submitted. Admin approval pending.");
+  if(token){await loadMe();show("home")}else show("login");
+ }catch(e){msg(e)}
 }
-
-function copyRef(){
- alert('Referral link will be added after Telegram Bot setup.');
+async function login(){
+ try{
+  const r=await api("/api/login","POST",{mobile:$("loginMobile").value.trim(),password:$("loginPass").value});
+  token=r.token||"";if(!token)throw new Error("Login token পাওয়া যায়নি");
+  localStorage.setItem("alora_token",token);await loadMe();show("home");
+ }catch(e){msg(e)}
 }
-
-function withdraw(){
- alert('Withdrawal is not connected yet. This is a demo interface.');
+async function loadMe(){
+ const r=await api("/api/me");user=r.user||r;
+ const balance=Number(user.balance||0);
+ $("userName").textContent=user.full_name||"User";
+ $("userId").textContent="ID: "+(user.id||"--");
+ $("accountStatus").textContent=user.payment_status||"Pending";
+ $("balance").textContent=money(balance);
+ $("withdrawBalance").textContent=money(balance);
+ $("profileName").textContent=user.full_name||"--";
+ $("profileMobile").textContent="Mobile: "+(user.mobile||"--");
+ $("profileId").textContent=user.id||"--";
+ $("profileStatus").textContent=user.payment_status||"Pending";
+ $("refCode").textContent=user.referral_code||"--";
+ $("profileCode").textContent=user.referral_code||"--";
+ $("totalIncome").textContent=money(user.total_income);
+ $("todayIncome").textContent=money(user.today_income);
 }
-
-update();
-
+async function loadHome(){
+ try{
+  await loadMe();
+  const [t,r]=await Promise.allSettled([api("/api/tasks"),api("/api/referrals")]);
+  if(t.status==="fulfilled"){
+   tasks=t.value.tasks||[];
+   $("taskCount").textContent=(t.value.completed_today||0)+"/6";
+   $("homeTasks").innerHTML=tasks.slice(0,3).map(taskHTML).join("")||'<div class="empty">No tasks available</div>';
+  }
+  if(r.status==="fulfilled"){
+   $("refCount").textContent=r.value.total_referrals||0;
+  }
+ }catch(e){console.error(e)}
+}
+function taskHTML(t){
+ const done=!!t.completed;
+ return `<div class="task"><div class="task-icon">🎯</div><div class="task-info"><b>${escapeHTML(t.title||"Daily Task")}</b><small>Reward ৳${Number(t.reward||5)}</small></div><button class="btn ${done?"light":""}" ${done?"disabled":""} onclick="openTask('${escapeAttr(t.id)}')">${done?"Completed":"Start"}</button></div>`;
+}
+function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(s){return String(s??"").replace(/['"\\]/g,"")}
+async function loadTasks(){
+ try{
+  const r=await api("/api/tasks");tasks=r.tasks||[];
+  $("taskList").innerHTML=tasks.map(taskHTML).join("")||'<div class="empty">আজকের Task এখনো পাওয়া যায়নি।</div>';
+ }catch(e){$("taskList").innerHTML='<div class="empty">Task API চালু নেই। Worker Update প্রয়োজন।</div>'}
+}
+async function openTask(id){
+ try{
+  const r=await api("/api/tasks/"+encodeURIComponent(id));
+  activeTask=r.task||r;
+  $("questionText").textContent=activeTask.question||"প্রশ্ন পাওয়া যায়নি";
+  const opts=activeTask.options||[];
+  $("answerOptions").innerHTML=opts.map((o,i)=>`<label class="item"><input type="radio" name="answer" value="${i}"> ${escapeHTML(o)}</label>`).join("");
+  show("taskDetail");
+ }catch(e){msg(e)}
+}
+async function submitTask(){
+ const selected=document.querySelector('input[name="answer"]:checked');
+ if(!selected)return alert("একটি উত্তর নির্বাচন করুন।");
+ try{
+  const r=await api("/api/tasks/submit","POST",{task_id:activeTask.id,answer:selected.value});
+  alert(r.message||"Answer submitted");
+  show("tasks");
+ }catch(e){msg(e)}
+}
+async function loadReferral(){
+ try{
+  const r=await api("/api/referrals");
+  $("refCount").textContent=r.total_referrals||0;
+  $("refTotal").textContent=r.total_referrals||0;
+  $("refBonus").textContent=money(r.referral_bonus||0);
+  const link=location.origin+location.pathname+"?ref="+encodeURIComponent(user?.referral_code||"");
+  $("refLink").textContent=link;
+ }catch(e){$("refLink").textContent="Referral API চালু নেই"}
+}
+function copyText(id){navigator.clipboard.writeText($(id).textContent).then(()=>alert("Copied"))}
+function copyReferral(){navigator.clipboard.writeText($("refLink").textContent).then(()=>alert("Referral link copied"))}
+function shareReferral(){
+ const link=$("refLink").textContent;
+ if(navigator.share)navigator.share({title:"Alora Pay",text:"Join Alora Pay using my referral link",url:link});
+ else copyReferral();
+}
+async function loadLeaderboard(){
+ try{
+  const r=await api("/api/leaderboard");
+  const list=r.users||r.leaderboard||[];
+  $("leaderList").innerHTML=list.slice(0,10).map((u,i)=>`<div class="rank"><div class="rank-no">${i+1}</div><div class="rank-name">${escapeHTML(u.full_name||"User")}</div><div class="rank-money">${money(u.total_income)}</div></div>`).join("")||'<div class="empty">এখনো Leaderboard Data নেই।</div>';
+ }catch(e){$("leaderList").innerHTML='<div class="empty">Leaderboard API Worker-এ যুক্ত করতে হবে।</div>'}
+}
+async function requestWithdraw(){
+ const amount=Number($("withdrawAmount").value),account_number=$("withdrawNumber").value.trim();
+ if(amount<500)return alert("Minimum Withdraw ৳500");
+ if(!account_number)return alert("Personal Number দিন");
+ if(!/^(01)[3-9]\d{8}$/.test(account_number))return alert("সঠিক বাংলাদেশি Mobile Number দিন");
+ if(!confirm(money(amount)+" Withdraw Request করবেন?"))return;
+ try{
+  const r=await api("/api/withdraw","POST",{amount,method:withdrawMethod,account_number});
+  alert(r.message||"Withdraw request submitted");
+  $("withdrawAmount").value="";$("withdrawNumber").value="";
+  await loadMe();
+ }catch(e){msg(e)}
+}
+function historyTab(type,btn){
+ historyType=type;document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));btn.classList.add("active");loadHistory(type);
+}
+async function loadHistory(type){
+ const paths={deposit:"/api/history/deposits",task:"/api/history/tasks",referral:"/api/history/referrals",withdraw:"/api/history/withdrawals"};
+ try{
+  const r=await api(paths[type]);const arr=r.history||r.items||[];
+  $("historyList").innerHTML=arr.map(x=>`<div class="item"><div class="row"><b>${escapeHTML(x.title||x.method||type)}</b><b>${money(x.amount||x.reward||0)}</b></div><p class="muted">${escapeHTML(x.status||"Recorded")} • ${escapeHTML(x.created_at||"")}</p></div>`).join("")||'<div class="empty">কোনো History নেই।</div>';
+ }catch(e){$("historyList").innerHTML='<div class="empty">এই History API Worker-এ যুক্ত করতে হবে।</div>'}
+}
+async function logout(){
+ try{await api("/api/logout","POST")}catch(e){}
+ token="";user=null;localStorage.removeItem("alora_token");show("welcome");
+}
+async function start(){
+ await loadConfig();
+ if(token){try{await loadMe();show("home")}catch(e){token="";localStorage.removeItem("alora_token");show("welcome")}}
+ const ref=new URLSearchParams(location.search).get("ref");
+ if(ref&&$("regRef"))$("regRef").value=ref;
+}
+start();
 </script>
 </body>
 </html>
-
-
