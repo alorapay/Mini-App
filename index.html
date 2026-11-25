@@ -262,7 +262,7 @@ async function loadMe(){
 async function loadHome(){
  try{
   await loadMe();
-  const [t,r]=await Promise.allSettled([api("/api/tasks"),api("/api/referrals")]);
+  const [t,r]=await Promise.allSettled([api("/api/tasks/today"),api("/api/referrals")]);
   if(t.status==="fulfilled"){
    tasks=t.value.tasks||[];
    $("taskCount").textContent=(t.value.completed_today||0)+"/6";
@@ -281,7 +281,7 @@ function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;",
 function escapeAttr(s){return String(s??"").replace(/['"\\]/g,"")}
 async function loadTasks(){
  try{
-  const r=await api("/api/tasks");tasks=r.tasks||[];
+  const r=await api("/api/tasks/today");tasks=r.tasks||[];
   $("taskList").innerHTML=tasks.map(taskHTML).join("")||'<div class="empty">আজকের Task এখনো পাওয়া যায়নি।</div>';
  }catch(e){$("taskList").innerHTML='<div class="empty">Task API চালু নেই। Worker Update প্রয়োজন।</div>'}
 }
