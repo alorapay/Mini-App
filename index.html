@@ -342,7 +342,8 @@ async function requestWithdraw(){
   await loadMe();
  }catch(e){
  if(e.message==="Insufficient Balance")return alert("Insufficient Balance");
- msg(e);
+  msg(e);
+ }
 }
 function historyTab(type,btn){
  historyType=type;document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));btn.classList.add("active");loadHistory(type);
