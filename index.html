@@ -284,7 +284,8 @@ async function loadTasks(){
   const r=await api("/api/tasks/today");tasks=r.tasks||[];
   $("taskList").innerHTML=tasks.map(taskHTML).join("")||'<div class="empty">আজকের Task এখনো পাওয়া যায়নি।</div>';
  }catch(e){
- $("taskList").innerHTML='<div class="empty">'+escapeHTML(e.message)+'</div>';
+  $("taskList").innerHTML='<div class="empty">'+escapeHTML(e.message)+'</div>';
+ }
 }
 async function openTask(id){
  try{
