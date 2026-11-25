@@ -255,9 +255,8 @@ async function loadMe(){
  $("profileId").textContent=user.id||"--";
  $("profileStatus").textContent=user.payment_status||"Pending";
  $("refCode").textContent=user.referral_code||"--";
- $("profileCode").textContent=user.referral_code||"--";
- $("totalIncome").textContent=money(user.total_income);
- $("todayIncome").textContent=money(user.today_income);
+ $("totalIncome").textContent=money(r.stats?.total_income);
+ $("todayIncome").textContent=money(r.stats?.today_income);
 }
 async function loadHome(){
  try{
