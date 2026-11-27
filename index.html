@@ -236,10 +236,24 @@ function updatePaymentNumber(){
   }
 
   try {
-    await navigator.clipboard.writeText(number);
-    alert("নম্বর কপি হয়েছে! ✅");
+    const input = document.createElement("textarea");
+    input.value = number;
+    input.style.position = "fixed";
+    input.style.opacity = "0";
+    document.body.appendChild(input);
+    input.select();
+    input.setSelectionRange(0, 99999);
+
+    const copied = document.execCommand("copy");
+    input.remove();
+
+    if (copied) {
+      alert("নম্বর কপি হয়েছে! ✅");
+    } else {
+      alert("কপি হয়নি। নম্বরটি হাতে কপি করুন।");
+    }
   } catch (e) {
-    alert("নম্বর কপি করা যায়নি।");
+    alert("কপি করা যায়নি।");
   }
 }
 function chooseWithdraw(method){
