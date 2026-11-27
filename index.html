@@ -73,7 +73,16 @@ header strong{font-size:22px}.screen{display:none;padding:16px}.screen.active{di
 <button class="method selected" id="bkashBtn" onclick="choosePay('bKash')">bKash</button>
 <button class="method" id="nagadBtn" onclick="choosePay('Nagad')">Nagad</button>
 </div>
-<div class="numberbox"><small>Send Money to Personal Number</small><h3 id="payNumber">Loading...</h3><small id="payProvider">bKash</small></div>
+<div class="numberbox">
+  <small>Send Money to Personal Number</small>
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;">
+    <h3 id="payNumber">Loading...</h3>
+    <button type="button" onclick="copyPaymentNumber()" style="padding:8px 12px;border:0;border-radius:8px;background:#3B14A7;color:white;">
+      Copy
+    </button>
+  </div>
+  <small id="payProvider">bKash</small>
+</div>
 <input id="regTrx" class="input" placeholder="300 টাকা পাঠানোর Transaction ID">
 <input id="regRef" class="input" placeholder="Referral Code (Optional)">
 <div class="notice">প্রথমে ৳৩০০ Send Money করুন। Transaction ID জমা দিন। Admin যাচাই করে Account Active করবেন।</div>
