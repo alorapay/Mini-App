@@ -228,6 +228,20 @@ function updatePaymentNumber(){
  $("payNumber").textContent=number||"Admin-এর Worker Config-এ নম্বর সেট করতে হবে";
  $("payProvider").textContent=paymentMethod+" Personal";
 }
+  async function copyPaymentNumber() {
+  const number = $("payNumber").textContent.trim();
+
+  if (!number || number === "Loading..." || number.includes("সেট করতে হবে")) {
+    return alert("Payment number পাওয়া যায়নি!");
+  }
+
+  try {
+    await navigator.clipboard.writeText(number);
+    alert("নম্বর কপি হয়েছে! ✅");
+  } catch (e) {
+    alert("নম্বর কপি করা যায়নি।");
+  }
+}
 function chooseWithdraw(method){
  withdrawMethod=method;
  $("wBkash").classList.toggle("selected",method==="bKash");
